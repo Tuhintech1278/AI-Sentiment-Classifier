@@ -33,44 +33,102 @@ AI-Sentiment-Classifier/
 ├── sentiment_dataset.csv
 ├── requirements.txt
 └── .gitignore
-How It Works
-The user enters a sentence or text.
-The application receives the user's input.
-The sentiment classifier analyzes the text.
-The model predicts the sentiment.
-The result is displayed as Positive, Negative, or Neutral.
-Example
-User Input
+```
+
+## How It Works
+
+1. The user enters text into the input box.
+2. The application receives the user's text.
+3. The sentiment classifier processes the text.
+4. The machine learning model predicts the sentiment.
+5. The result is displayed as **Positive**, **Negative**, or **Neutral**.
+
+## Example
+
+### Positive Sentiment
+
+**Input:**
+```text
 I really enjoyed this product. It is amazing!
-Prediction
+```
+
+**Prediction:**
+```text
 Positive
+```
 
-Another example:
+### Negative Sentiment
 
-User Input
+**Input:**
+```text
 I am very disappointed with this service.
-Prediction
+```
+
+**Prediction:**
+```text
 Negative
-How to Run the Project
-1. Clone the repository
+```
+
+### Neutral Sentiment
+
+**Input:**
+```text
+The product was delivered today.
+```
+
+**Prediction:**
+```text
+Neutral
+```
+
+## How to Run
+
+### 1. Clone the repository
+
+```bash
 git clone https://github.com/Tuhintech1278/AI-Sentiment-Classifier.git
-2. Open the project folder
+```
+
+### 2. Open the project folder
+
+```bash
 cd AI-Sentiment-Classifier
-3. Install the required packages
+```
+
+### 3. Install the required packages
+
+```bash
 pip install -r requirements.txt
-4. Run the application
+```
+
+### 4. Run the application
+
+```bash
 python app.py
-5. Open the application
+```
 
-Open your browser and visit:
+### 5. Open the website
 
+Open your browser and go to:
+
+```text
 http://127.0.0.1:5000
-Important
+```
 
-This project runs locally using Flask. It is not currently deployed online.
+## Important
 
-Author
+This project runs locally using Flask and is **not currently deployed online**.
 
-Tuhin Mondal
+## Future Improvements
+
+- Improve model accuracy with a larger dataset
+- Add more sentiment categories
+- Add prediction confidence scores
+- Improve the user interface
+- Deploy the application online
+
+## Author
+
+**Tuhin Mondal**
 
 GitHub: https://github.com/Tuhintech1278
