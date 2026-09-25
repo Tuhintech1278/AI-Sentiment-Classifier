@@ -1,0 +1,10 @@
+text,sentiment
+"I absolutely love this product","Positive"
+"This is an amazing experience","Positive"
+"I am very happy with the service","Positive"
+"I hate this product","Negative"
+"This was a terrible experience","Negative"
+"The service was extremely bad","Negative"
+"The product is okay","Neutral"
+"It is an average experience","Neutral"
+"Nothing special about this product","Neutral"

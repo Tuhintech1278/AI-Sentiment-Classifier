@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SentimentAI | Intelligent Text Analysis</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+
+            background:
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.25), transparent 30%),
+                radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.25), transparent 30%),
+                #080b18;
+
+            color: white;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px;
+        }
+
+
+        /* Main container */
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+
+            background: rgba(17, 24, 39, 0.82);
+
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+            border-radius: 25px;
+
+            padding: 45px;
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.45),
+                inset 0 1px rgba(255, 255, 255, 0.08);
+
+            backdrop-filter: blur(20px);
+
+            text-align: center;
+        }
+
+
+        /* Header */
+
+        .logo {
+            width: 75px;
+            height: 75px;
+
+            margin: 0 auto 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 35px;
+
+            border-radius: 20px;
+
+            background: linear-gradient(
+                135deg,
+                #6366f1,
+                #a855f7
+            );
+
+            box-shadow:
+                0 10px 30px rgba(99, 102, 241, 0.4);
+        }
+
+
+        h1 {
+            font-size: 42px;
+
+            margin-bottom: 12px;
+
+            background: linear-gradient(
+                90deg,
+                #818cf8,
+                #c084fc,
+                #f0abfc
+            );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+
+        .subtitle {
+            color: #9ca3af;
+
+            font-size: 17px;
+
+            margin-bottom: 35px;
+
+            line-height: 1.6;
+        }
+
+
+        /* Input */
+
+        .input-container {
+            position: relative;
+        }
+
+
+        textarea {
+            width: 100%;
+
+            height: 180px;
+
+            resize: none;
+
+            padding: 20px;
+
+            border-radius: 18px;
+
+            border: 1px solid #374151;
+
+            background: rgba(3, 7, 18, 0.8);
+
+            color: white;
+
+            font-size: 17px;
+
+            line-height: 1.6;
+
+            outline: none;
+
+            transition: 0.3s;
+        }
+
+
+        textarea::placeholder {
+            color: #6b7280;
+        }
+
+
+        textarea:focus {
+            border-color: #818cf8;
+
+            box-shadow:
+                0 0 0 3px rgba(99, 102, 241, 0.15),
+                0 0 30px rgba(99, 102, 241, 0.1);
+        }
+
+
+        /* Buttons */
+
+        .buttons {
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 18px;
+        }
+
+
+        button {
+            flex: 1;
+
+            border: none;
+
+            padding: 15px;
+
+            border-radius: 12px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+
+        .analyze {
+            background: linear-gradient(
+                135deg,
+                #6366f1,
+                #8b5cf6
+            );
+
+            color: white;
+
+            box-shadow:
+                0 10px 25px rgba(99, 102, 241, 0.3);
+        }
+
+
+        .analyze:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 15px 35px rgba(99, 102, 241, 0.45);
+        }
+
+
+        .clear {
+            background: #1f2937;
+
+            color: #d1d5db;
+        }
+
+
+        .clear:hover {
+            background: #374151;
+        }
+
+
+        /* Examples */
+
+        .examples {
+            margin-top: 28px;
+
+            text-align: left;
+        }
+
+
+        .examples-title {
+            color: #9ca3af;
+
+            font-size: 14px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .example-buttons {
+            display: flex;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .example {
+            flex: none;
+
+            padding: 9px 14px;
+
+            background: #111827;
+
+            border: 1px solid #374151;
+
+            color: #d1d5db;
+
+            font-size: 13px;
+
+            border-radius: 20px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .example:hover {
+            border-color: #818cf8;
+
+            color: white;
+
+            transform: translateY(-1px);
+        }
+
+
+        /* Result */
+
+        .result {
+            margin-top: 35px;
+
+            padding: 30px;
+
+            border-radius: 20px;
+
+            background: rgba(3, 7, 18, 0.7);
+
+            border: 1px solid #374151;
+
+            animation: appear 0.5s ease;
+        }
+
+
+        @keyframes appear {
+
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        .result-label {
+            color: #9ca3af;
+
+            font-size: 14px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .result h2 {
+            font-size: 32px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .positive {
+            color: #4ade80;
+        }
+
+
+        .negative {
+            color: #fb7185;
+        }
+
+
+        .neutral {
+            color: #facc15;
+        }
+
+
+        .result-text {
+            color: #9ca3af;
+
+            margin-top: 10px;
+
+            font-size: 15px;
+        }
+
+
+        /* Footer */
+
+        .footer {
+            margin-top: 30px;
+
+            color: #6b7280;
+
+            font-size: 13px;
+        }
+
+
+        .footer span {
+            color: #818cf8;
+        }
+
+
+        /* Mobile */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .container {
+                padding: 28px 20px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .subtitle {
+                font-size: 15px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            textarea {
+                height: 160px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <div class="logo">
+            🤖
+        </div>
+
+
+        <h1>SentimentAI</h1>
+
+        <p class="subtitle">
+            Intelligent Natural Language Sentiment Analysis
+            <br>
+            Analyze text and discover its emotional tone using machine learning.
+        </p>
+
+
+        <form method="POST">
+
+            <div class="input-container">
+
+                <textarea
+                    id="text"
+                    name="text"
+                    placeholder="Write something here...&#10;&#10;Example: I absolutely love this product!"
+                    required
+                >{{ user_text }}</textarea>
+
+            </div>
+
+
+            <div class="buttons">
+
+                <button
+                    type="submit"
+                    class="analyze"
+                >
+                    ✨ Analyze Sentiment
+                </button>
+
+
+                <button
+                    type="button"
+                    class="clear"
+                    onclick="clearText()"
+                >
+                    🗑 Clear
+                </button>
+
+            </div>
+
+        </form>
+
+
+        <!-- Examples -->
+
+        <div class="examples">
+
+            <div class="examples-title">
+                Try an example
+            </div>
+
+
+            <div class="example-buttons">
+
+                <button
+                    class="example"
+                    onclick="setText('I absolutely love this product!')"
+                >
+                    😊 Positive
+                </button>
+
+
+                <button
+                    class="example"
+                    onclick="setText('This is the worst experience ever.')"
+                >
+                    😞 Negative
+                </button>
+
+
+                <button
+                    class="example"
+                    onclick="setText('The product is okay, nothing special.')"
+                >
+                    😐 Neutral
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Result -->
+
+        {% if prediction %}
+
+        <div class="result">
+
+            <div class="result-label">
+                AI Analysis Result
+            </div>
+
+
+            {% if prediction == "Positive" %}
+
+                <h2 class="positive">
+                    😊 Positive
+                </h2>
+
+                <p class="result-text">
+                    The model detected a positive sentiment in your text.
+                </p>
+
+
+            {% elif prediction == "Negative" %}
+
+                <h2 class="negative">
+                    😞 Negative
+                </h2>
+
+                <p class="result-text">
+                    The model detected a negative sentiment in your text.
+                </p>
+
+
+            {% else %}
+
+                <h2 class="neutral">
+                    😐 Neutral
+                </h2>
+
+                <p class="result-text">
+                    The model detected a neutral sentiment in your text.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+        {% endif %}
+
+
+        <div class="footer">
+            Powered by <span>Python • NLP • TF-IDF • Machine Learning</span>
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function setText(text) {
+
+            document.getElementById("text").value = text;
+
+            document.getElementById("text").focus();
+
+        }
+
+
+        function clearText() {
+
+            document.getElementById("text").value = "";
+
+        }
+
+    </script>
+
+</body>
+
+</html>
